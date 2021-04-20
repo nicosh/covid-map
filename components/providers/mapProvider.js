@@ -3,12 +3,6 @@ import * as THREE from 'three';
 import { ThreeLayer, BaseObject } from 'maptalks.three/dist/maptalks.three.js'
 import Circle from '../animations/circle'
 import * as maptalks from 'maptalks';
-import geo from '../../data/geo/china'
-import aggregated from '../../data/geo/eu'
-import aggregated2 from '../../data/geo/eu2'
-import italy from '../../data/geo/italy'
-
-
 import { AnimateMarkerLayer } from 'maptalks.animatemarker/dist/maptalks.animatemarker.js'
 
 export const MapContext = React.createContext(null)
@@ -17,11 +11,16 @@ export function MapProvider({ children, ...rest }) {
     const [animating, setAnimating] = useState(false)
     const [prevLayer, setPrevLayer] = useState(false)
     const [index, setIndex] = useState(0)
+    const [ThreeLayers, setThreeLayers] = useState([])
+
+
     const steps = [
         {
             cb: async (map) => {
                 setAnimating(true)
-                let frame2 = await AddLayerbubbles(map,geo)
+                let data = await fetch("/api/china")
+                let json = await data.json()
+                let frame2 = await AddLayerbubbles(map,json)
                 setPrevLayer(frame2)
                 let frame = await moveTo(map, [114.295181, 30.583332])
                 setAnimating(false)
@@ -32,15 +31,18 @@ export function MapProvider({ children, ...rest }) {
                 setAnimating(true)
                 let frame = await changeView(map, [114.295181, 30.583332]);
                 map.removeLayer(prevLayer)
-                let animation = await addCircleInfo(map, [114.295181, 30.583332])
+                let frame2 = await addCircleInfo(map, [114.295181, 30.583332])
+                setThreeLayers(ThreeLayers.concat(frame2))
                 setAnimating(false)
             }
         },
         {
             cb: async (map) => {
                 setAnimating(true)
+                let data = await fetch("/api/eu2")
+                let json = await data.json()
                 let frame = await moveTo(map, [7.981400, 42.032974])
-                let frame2 = await AddLayerbubbles(map,aggregated2)
+                let frame2 = await AddLayerbubbles(map,json)
                 setPrevLayer(frame2)
                 setAnimating(false)
             }
@@ -48,16 +50,50 @@ export function MapProvider({ children, ...rest }) {
         {
             cb: async (map) => {
                 setAnimating(true)
+                let data = await fetch("/api/italy")
+                let json = await data.json()
                 let frame = await changeView(map, [7.981400, 42.032974]);
                 map.removeLayer(prevLayer)
+                let frame2 = await AddBarsLayer(map, json);
+                setThreeLayers(ThreeLayers.concat(frame2))
                 setAnimating(false)
             }
         },
         {
             cb: async (map) => {
+                return true
+            }
+        },
+        {
+            cb: async (map) => {
                 setAnimating(true)
-                let frame = await AddBarsLayer(map, italy);
+                let data = await fetch("/api/us")
+                let json = await data.json()
+                let frame = await changeView(map, [-98.538751, 38.272689],5);
+                let frame2 = await AddBarsLayer(map, json,"t3",false);
+                setThreeLayers(ThreeLayers.concat(frame2))
                 setAnimating(false)
+            }
+        },
+        {
+            cb: async (map) => {
+                return true
+            }
+        },
+        {
+            cb: async (map) => {
+                setAnimating(true)
+                let frame = await moveTo(map,  [-35.567045,37.718590],3)
+                ThreeLayers.forEach(el => {
+                    el.remove()
+                })
+
+                setAnimating(false)
+            }
+        },
+        {
+            cb: async (map) => {
+                return true
             }
         }
     ]
@@ -81,18 +117,17 @@ export function MapProvider({ children, ...rest }) {
             baseLayer: new maptalks.TileLayer('base', {
                 urlTemplate: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png',
                 subdomains: ['a', 'b', 'c', 'd'],
-                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             })
         });
         return map
     }
 
     // fly to a given point
-    const moveTo = (map, center) => {
+    const moveTo = (map, center,zoom=4) => {
         return new Promise((resolve, reject) => {
             map.animateTo({
                 center,
-                zoom: 4,
+                zoom,
                 pitch: 0,
                 bearing: 20
             }, {
@@ -107,11 +142,11 @@ export function MapProvider({ children, ...rest }) {
     }
 
     // zoom-in and aniamte to a given point, also show the marker
-    const changeView = (map, center) => {
+    const changeView = (map, center,zoom=6) => {
         return new Promise((resolve, reject) => {
             map.animateTo({
                 center,
-                zoom: 6,
+                zoom,
                 pitch: 65,
                 bearing: 360
             }, {
@@ -196,7 +231,7 @@ export function MapProvider({ children, ...rest }) {
                 });
                 animateShow()
                 threeLayer.addMesh(circles);
-                resolve("animation done")
+                resolve(threeLayer)
             }
 
             function animateShow() {
@@ -210,9 +245,13 @@ export function MapProvider({ children, ...rest }) {
 
         })
     }
-    const AddBarsLayer = (map,aggregated) => {
+
+
+
+
+    const AddBarsLayer = (map,aggregated,layerName="t2",rev=true) => {
         return new Promise((resolve, reject) => {
-            let threeLayer = new ThreeLayer('t2', {
+            let threeLayer = new ThreeLayer(layerName, {
                 forceRenderOnMoving: true,
                 forceRenderOnRotating: true
                 // animation: true
@@ -236,10 +275,13 @@ export function MapProvider({ children, ...rest }) {
                 const time = 'time';
                 const json = aggregated
                 bars = json.filter(function (dataItem) {
-                    return dataItem[2] > 300;
+                    return dataItem[2] > 0;
                 }).slice(0, Infinity).map(function (dataItem) {
                     let coords = dataItem.slice(0, 2)
-                    coords.reverse()
+                    if(rev){
+                        coords.reverse()
+
+                    }
                     return {
                         coordinate: coords,
                         height: dataItem[2]
@@ -281,7 +323,7 @@ export function MapProvider({ children, ...rest }) {
                 threeLayer.addMesh(bars);
                 animateShow()
                 animation();
-                resolve("animation done")
+                resolve(threeLayer)
 
             }
 

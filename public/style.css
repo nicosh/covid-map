@@ -26,3 +26,23 @@ p{
     font-weight: 400;
     color : #fff;  
 }
+.maptalks-attribution{
+    display: none !important;
+}
+@media (max-width: 767.98px) { 
+    .mainheading{
+        font-size: 2em;
+        font-weight: 900;
+        color : #fff;
+    }
+    
+    .subheading{
+        font-size: 1em;
+        font-weight: 400;
+        color : #fff;  
+    }
+    p{
+          font-size: 0.8em;
+
+    }
+}
