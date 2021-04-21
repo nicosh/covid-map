@@ -11,13 +11,11 @@ const Home = () => (
     <Head>
       <title>Covid-19 timeline map</title>
       <meta name="description" content="Interactive covid-19 timeline map" />
-      <meta property="og:title" content="Site Title" />
+      <meta property="og:title" content="Interactive covid-19 timeline map" />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="http://my.site.com" />
-      <meta property="og:image" content="http://my.site.com/images/thumb.png" />
-      <meta property="og:description" content="Site description" />
-      <meta name="theme-color" content="#FF0000" />
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="og:url" content="https://covid19.czzncl.dev/" />
+      <meta property="og:image" content="https://covid19.czzncl.dev/screen.png" />
+      <meta property="og:description" content="Interactive covid-19 timeline map" />
     </Head>
         <DynamicComponentWithNoSSR />
   </div>

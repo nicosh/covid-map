@@ -161,7 +161,7 @@ export function MapProvider({ children, ...rest }) {
             touchZoom: false,        //disable touchzoom
             doubleClickZoom: false,  //disable doubleclick zoom
             baseLayer: new maptalks.TileLayer('base', {
-                urlTemplate: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png',
+                urlTemplate: 'http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
                 subdomains: ['a', 'b', 'c', 'd'],
             })
         });
