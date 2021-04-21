@@ -8737,9 +8737,11 @@ const france = fr.map(el => {
     let perc = (population*10)/max
     return [el.lat,el.lng,perc]
 })
+
+// this is not real data
 const aggregated = [...spain,...italy,...france]
 let tmp = aggregated.map((el,i) => {
-    return  {type:"Feature",properties:{mag:4.8},geometry:{type:"Point",coordinates:[el[1],el[0]]},"id":i}
+    return  {type:"Feature",properties:{mag:10},geometry:{type:"Point",coordinates:[el[1],el[0]]},"id":i}
 })
 var earthquakes = {"type":"FeatureCollection","metadata":{"generated":1493627919000},"features": tmp}
 export default earthquakes

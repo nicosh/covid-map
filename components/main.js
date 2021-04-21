@@ -3,7 +3,7 @@ import styles from './Main.module.css'
 import { useMap } from './providers/mapProvider'
 import layers from '../components/layers/layers'
 const Main = () => {
-    const { initMap, moveTo, changeView, AddLayerbubbles, animating, nextAnimation,index } = useMap()
+    const { initMap, canGoNext, animating, nextAnimation,index } = useMap()
     const section = useRef();
     const [map, setMap] = useState(false)
 
@@ -30,13 +30,10 @@ const Main = () => {
         <div className={styles.map}>
             {!animating &&  layer}
             <div onKeyDown={(e) => { handleChange(e) }} className={styles.map} id="map" ref={section}></div>
-            {!animating &&
+            {!animating && canGoNext &&
                 <div className={styles.controls}>
-                    <div className={styles.control_left}>
-                        <a href="#" className={styles.button}> {"<"} Prev</a>
-                    </div>
                     <div className={styles.control_right}>
-                        <a onClick={(e) => { handleNext(e) }} href="#" className={styles.button}>Next {">"}</a>
+                        <a onClick={(e) => { handleNext(e) }} href="#" className={styles.button}>Next </a>
                     </div>
                 </div>
             }

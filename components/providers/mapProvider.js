@@ -12,7 +12,7 @@ export function MapProvider({ children, ...rest }) {
     const [prevLayer, setPrevLayer] = useState(false)
     const [index, setIndex] = useState(0)
     const [ThreeLayers, setThreeLayers] = useState([])
-
+    const [canGoNext, setcanGoNext] = useState(true)
 
     const steps = [
         {
@@ -93,6 +93,52 @@ export function MapProvider({ children, ...rest }) {
         },
         {
             cb: async (map) => {
+                return true
+            }
+        },
+        {
+            cb: async (map) => {
+                setAnimating(true)
+                let frame = await changeView(map, [-1.698404,52.749594],6);
+                setAnimating(false)
+            }
+        },
+        {
+            cb: async (map) => {
+                return true
+            }
+        },
+        {
+            cb: async (map) => {
+                setAnimating(true)
+                let data = await fetch("/api/uk")
+                let json = await data.json()
+                let frame2 = await AddBarsLayer(map, json,"t4",true);
+                setThreeLayers(ThreeLayers.concat(frame2))
+                setAnimating(false)
+            }
+        },
+        {
+            cb: async (map) => {
+                setAnimating(true)
+                let frame = await moveTo(map,  [-35.567045,37.718590],3)
+                let data = await fetch("/api/world")
+                let json = await data.json()
+                let frame2 = await AddLayerbubbles(map,json)
+                ThreeLayers.forEach(el => {
+                    el.remove()
+                })
+                setAnimating(false)
+            }
+        },
+        {
+            cb: async (map) => {
+                return true
+            }
+        },
+        {
+            cb: async (map) => {
+                setcanGoNext(false)
                 return true
             }
         }
@@ -370,7 +416,7 @@ export function MapProvider({ children, ...rest }) {
             )
                 .setStyle([
                     {
-                        filter: ['<=', 'mag', 2],
+                        filter: ['<=', 'mag', 9 ],
                         symbol: {
                             'markerType': 'ellipse',
                             'markerLineWidth': 0,
@@ -381,7 +427,7 @@ export function MapProvider({ children, ...rest }) {
                         }
                     },
                     {
-                        filter: ['<=', 'mag', 5],
+                        filter: ['<=', 'mag', 11],
                         symbol: {
                             'markerType': 'ellipse',
                             'markerLineWidth': 0,
@@ -392,7 +438,7 @@ export function MapProvider({ children, ...rest }) {
                         }
                     },
                     {
-                        filter: ['>', 'mag', 5],
+                        filter: ['>', 'mag', 11],
                         symbol: {
                             'markerType': 'ellipse',
                             'markerLineWidth': 0,
@@ -416,6 +462,7 @@ export function MapProvider({ children, ...rest }) {
         AddLayerbubbles,
         animating,
         nextAnimation,
+        canGoNext,
         index
     }
 

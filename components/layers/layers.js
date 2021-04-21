@@ -161,6 +161,133 @@ const Layer10 = () => {
         </div>
     )
 }
+const Layer11 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">8 December</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">Mass vaccination begins</h3>
+                        <p>
+                        The UK’s mass-vaccination programme begins as over 50 hospitals in the UK start administering the Pfizer/BioNTech vaccine to people aged over 80. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const Layer12 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">14 December</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">New variants</h3>
+                        <p>
+                        A new variant of the coronavirus, possibly associated with a faster spread, is identified in the county of Kent in the UK.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const Layer13 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">January 2021</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">UK cases surge</h3>
+                        <p>
+                        UK hospitals risk being overwhelmed by surging cases, with evidence suggesting this is partly due to the variant first detected in Kent, which spreads faster.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const Layer14 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">15 January 2021</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">2 million deaths</h3>
+                        <p>
+                        2 million people are reported to have died from covid-19 since the pandemic began. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const Layer15 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">16 February 2021</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">Worldwide vaccination</h3>
+                        <p>
+                        More than 216 million people have now received their first dose worldwide.  
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const Layer16 = () => {
+    return (
+        <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">March 2021</h2>
+                        <h3 className="animate__animated animate__fadeInUp  subheading text-center">Staying ahead of the virus</h3>
+                        <p>
+                        6 people in the UK test positive for the P.1 coronavirus variant first detected in Brazil. Five of those six had either returned or had close contact with people returning from Brazil. One of several variants, along with the B.1.1.7 and B.1.351  that may be more transmissible, vaccine developers are already modifying existing vaccines to stay ahead of the virus.
+                        </p>
+                        <p>
+                        to be continued...
+                        </p>
+                        <p> 
+                            <a target="_blank" className="ms-2 highlight" href="https://www.newscientist.com/article/2270361-covid-19-the-story-of-a-pandemic/">Events timeline</a> 
+                            <a target="_blank" className="ms-2 highlight" href="https://github.com/CSSEGISandData/COVID-19">Data source</a> 
+                            <a target="_blank" className="ms-2 highlight" href="https://github.com/nicosh/covid-map">Source code</a> 
 
-const layers = [<Layer1 />, <Layer2 />,<Layer3/>,<Layer4/>,<Layer5/>,<Layer6/>,<Layer7/>,<Layer8/>,<Layer9/>,<Layer10/>]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+const layers = [<Layer1 />, 
+                <Layer2 />,
+                <Layer3/>,
+                <Layer4/>,
+                <Layer5/>,
+                <Layer6/>,
+                <Layer7/>,
+                <Layer8/>,
+                <Layer9/>,
+                <Layer10/>,
+                <Layer11/>,
+                <Layer12/>,
+                <Layer13/>,
+                <Layer14/>,
+                <Layer15/>,
+                <Layer16/>
+
+            ]
 export default layers

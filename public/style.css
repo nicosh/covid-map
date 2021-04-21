@@ -5,7 +5,7 @@ body{
     color: #fff;
 }
 p{
-    text-shadow: 2px 2px black;
+    text-shadow: black 0px 0px 10px;
 }
 .layer-holder{
     position: absolute;
@@ -28,6 +28,14 @@ p{
 }
 .maptalks-attribution{
     display: none !important;
+}
+
+.highlight{
+    background-color: #fff;
+    text-shadow: none;
+    text-decoration: none;
+    padding: 5px;
+
 }
 @media (max-width: 767.98px) { 
     .mainheading{
