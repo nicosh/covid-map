@@ -26,6 +26,7 @@ const Main = () => {
     }
 
     const layer = layers[index]
+    let btnName = index == 0 ? "Start" : "Next"
     return (
         <div className={styles.map}>
             {!animating &&  layer}
@@ -33,7 +34,7 @@ const Main = () => {
             {!animating && canGoNext &&
                 <div className={styles.controls}>
                     <div className={styles.control_right}>
-                        <a onClick={(e) => { handleNext(e) }} href="#" className={styles.button}>Next </a>
+                        <a onClick={(e) => { handleNext(e) }} href="#" className={styles.button}> {btnName} </a>
                     </div>
                 </div>
             }

@@ -2,6 +2,13 @@
 const Layer1 = () => {
     return (
         <div className="layer-holder">
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col-md-12 p-5 text-center">
+                        <h2 className="animate__animated animate__fadeInUp  mainheading text-center">Covid-19: The story of a pandemic</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
