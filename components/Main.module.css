@@ -35,5 +35,15 @@
     font-size: 45px;
     color : #fff;
     text-decoration: none;
-
+}
+.disabled{
+    display: block;
+    padding-top: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 45px;
+    color : #fff;
+    text-decoration: none;
+    pointer-events:none; 
+    opacity: 0.5;
 }
